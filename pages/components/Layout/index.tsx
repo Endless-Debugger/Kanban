@@ -6,23 +6,21 @@ import Sidebar from "../Sidebar";
 import Main from "../Main";
 
 function Layout({
-    title,
-    children
-    }: {
-        children: React.ReactNode,
-        title: string
-    }
-) {
-
-    return (
-        <>
-            <Apphead title={title}/>
-            {children}
-            <Sidebar/>
-            <SecondarySideBar/>
-            <Main/>
-        </>
-    )
+  title,
+  children,
+}: {
+  children: React.ReactNode;
+  title: string;
+}) {
+  return (
+    <>
+      <Apphead title={title} />
+      {children}
+      <Sidebar />
+      <SecondarySideBar />
+      <Main />
+    </>
+  );
 }
 
 export default Layout;

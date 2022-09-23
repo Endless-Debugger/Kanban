@@ -119,7 +119,7 @@ const CommentSpan = styled("span", {
     marginBottom: "2px"
 })
 
-function KanbanCard ({term, image, desc, title, subtitle, num_comments, date, children}: {
+function KanbanCard ({term, image, desc, title, subtitle, num_comments, date}: {
     term: string,
     image: string,
     desc: string,
@@ -127,7 +127,7 @@ function KanbanCard ({term, image, desc, title, subtitle, num_comments, date, ch
     subtitle: string,
     num_comments: string,
     date: string,
-    children:any
+
    
 }) {
     

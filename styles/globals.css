@@ -2,8 +2,24 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: Inter;
+  font-family: GTWalshiem;
   overflow-x: hidden;
   
 }
 
+@font-face {
+  font-family: GTWalshiem;
+  src: url("../public/fonts//walshiemregular.otf") format("opentype");
+}
+
+@font-face {
+  font-family: GTWalshiem;
+  font-weight: bold;
+  src: url("../public/fonts//GT-Walsheim-Bold-Trial.otf") format("opentype");
+}
+
+@font-face {
+  font-family: GTWalshiem;
+  font-weight: 600;
+  src: url("../public/fonts//GT-Walsheim-Medium-Trial.otf") format("opentype");
+}
