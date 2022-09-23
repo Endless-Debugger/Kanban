@@ -16,6 +16,7 @@ const InfoDiv = styled("div", {
   marginBottom: "20px",
   display: "flex",
   gap: "50px",
+  
 });
 
 const InfoFlex = styled("div", {
@@ -203,7 +204,7 @@ function Kanban() {
   }, []);
   const [columns, setColumns] = useState(columnsFromBackend);
   return (
-    <div style={{ marginLeft: "27px", overflow: "hidden" }}>
+    <div style={{ marginLeft: "27px", overflow: "hidden", width: "1200px" }}>
       <InfoDiv>
         <InfoFlex>
           <svg style={{ width: "26px", height: "26px" }} viewBox="0 0 24 24">
@@ -342,6 +343,7 @@ function Kanban() {
                               background: snapshot.isDraggingOver
                                 ? "#8478FE"
                                 : "",
+                                borderRadius: "8px"
                             }}
                           >
                             <OneList>

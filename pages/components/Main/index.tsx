@@ -11,7 +11,7 @@ const MainDiv = styled("div", {
   position: "absolute",
   top: "0",
   left: "461px",
-  width: "100%",
+
 });
 
 const ButtonDiv = styled("div", {
