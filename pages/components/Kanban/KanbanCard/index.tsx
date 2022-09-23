@@ -9,7 +9,23 @@ const KanCard = styled("div", {
     backgroundColor: "#FFFFFF",
     border: "1px solid #EAEDF0",
     height: "fit-content",
-    marginBottom: "20px"
+   
+    position: "relative",
+    '&::after': {
+        content: "",
+        position: "absolute",
+        bottom: "-7px",
+       
+        width: "96%",
+        left: "4px",
+        borderRadius: "1000000px",
+        height: "4px",
+        borderRight: "2px solid #EAEDF0",
+        borderLeft: "2px solid #EAEDF0",
+        borderBottom: "2px solid #EAEDF0",
+        backgroundColor: "#FFFFFF",
+
+    }
 })
 
 
@@ -103,7 +119,7 @@ const CommentSpan = styled("span", {
     marginBottom: "2px"
 })
 
-function KanbanCard ({term, image, desc, title, subtitle, num_comments, date, isPlaceholder, id, ref}: {
+function KanbanCard ({term, image, desc, title, subtitle, num_comments, date, children}: {
     term: string,
     image: string,
     desc: string,
@@ -111,9 +127,8 @@ function KanbanCard ({term, image, desc, title, subtitle, num_comments, date, is
     subtitle: string,
     num_comments: string,
     date: string,
-    isPlaceholder: any,
-    id: any,
-    ref: any
+    children:any
+   
 }) {
     
     return (
