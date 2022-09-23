@@ -9,6 +9,7 @@ const OneList = styled("div", {
   flexFlow: "column",
   minWidth: "340px",
   gap: "20px",
+  borderRadius: '8px',
 });
 const InfoDiv = styled("div", {
   height: "80px",
