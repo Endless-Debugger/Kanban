@@ -16,7 +16,7 @@ const KanCard = styled("div", {
         position: "absolute",
         bottom: "-7px",
        
-        width: "96%",
+        width: "97%",
         left: "4px",
         borderRadius: "1000000px",
         height: "4px",
