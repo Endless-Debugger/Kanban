@@ -226,6 +226,7 @@ function Kanban() {
             />
           </svg>
           <InfoHeading>TODO</InfoHeading>
+          {/*@ts-ignore*/}
           <InfoChip>{columns[Object.keys(columns)[0]].items.length}</InfoChip>
           <svg
             style={{
@@ -264,6 +265,7 @@ function Kanban() {
             />
           </svg>
           <InfoHeading>IN PROGRESS</InfoHeading>
+          {/*@ts-ignore*/}
           <InfoChip>{columns[Object.keys(columns)[1]].items.length}</InfoChip>
           <svg
             style={{
@@ -302,6 +304,7 @@ function Kanban() {
             />
           </svg>
           <InfoHeading>COMPLETED</InfoHeading>
+          {/*@ts-ignore*/}
           <InfoChip>{columns[Object.keys(columns)[2]].items.length}</InfoChip>
           <svg
             style={{

@@ -94,6 +94,7 @@ export default function NewCardPopup({children, items, setItems, id, close, setW
                 <Input required={true} style={{fontWeight: "500"}} value={caption} placeholder={"Set Caption"} onChange={(e:any) => {setCaption(e.target.value)}}></Input>
                 <Textarea required={true} value={desc} placeholder={"Set Description"} onChange={(e:any) => {setDesc(e.target.value)}}></Textarea>
                 <Input required={true} value={date} placeholder={"Set Date"} onChange={(e:any) => {setDate(e.target.value)}}></Input>
+                {/*@ts-ignore*/}
                 <Select options={options} style={{height: "50px", fontSize: "18px", width: "100%"}} value={tag} placeholder={tag} onChange={(e:any) => {setTag(e.value), console.log(e.value)}}  ></Select>
                 <Button style={{ marginTop: "20px",marginLeft :"auto", width: "200px", height: "50px", marginRight :"auto", display: "block"}}>Submit</Button>
             </form>

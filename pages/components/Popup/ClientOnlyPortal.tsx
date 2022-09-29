@@ -10,6 +10,6 @@ export default function ClientOnlyPortal({ children, selector }:{children:any, s
     ref.current = document.querySelector(selector);
     setMounted(true);
   }, [selector]);
-
+  //@ts-ignore
   return mounted ? createPortal(children, ref.current) : null;
 }
