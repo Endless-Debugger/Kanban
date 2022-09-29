@@ -2,7 +2,7 @@ import { styled } from "@stitches/react";
 import { useState } from "react";
 
 const Secondary = styled("div", {
-  width: "350px",
+  width: "18.5%",
   borderRight: "1px solid #EAEDF0",
   height: "100vh",
   ovverflow: "scroll",

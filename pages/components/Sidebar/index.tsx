@@ -41,7 +41,7 @@ const FlexSideBar = styled("div", {
   top: "0px",
   left: "0px",
   height: "100vh",
-  width: "86px",
+  width: "4.5%",
   background: "#FFFFFF",
   borderRight: "1px solid #EAEDF0",
   display: "flex",

@@ -11,9 +11,9 @@ const ImageDivNth = styled("div", { marginRight: "24px", marginLeft: "5px", bord
 const MainDiv = styled("div", {
   position: "absolute",
   top: "0",
-  left: "437px",
+  left: "23%",
 
-  width: "1482px"
+  width: "77%"
 
 });
 
@@ -22,7 +22,7 @@ const ButtonDiv = styled("div", {
   border: "1px solid #EAEDF0",
   display: "flex",
   alignItems: "center",
-  width: "1490",
+ 
 });
 const InfoDiv = styled("div", {
   height: "80px",
