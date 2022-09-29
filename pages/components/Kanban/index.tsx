@@ -3,8 +3,9 @@ const NLists = styled("div", {
   display: "flex",
   
   gap: "30px",
-  height: "650px",
-  overflow: "scroll",
+  
+  overflowY: "auto",
+  height: "calc(100vh - 149px)"
 
   
   
