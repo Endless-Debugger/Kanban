@@ -4,12 +4,13 @@ body {
   margin: 0;
   font-family: GTWalshiem;
   overflow-x: hidden;
+  overflow-y: hidden;
   
 }
 
 @font-face {
   font-family: GTWalshiem;
-  src: url("../public/fonts//walshiemregular.otf") format("opentype");
+  src: url("../public/fonts//GT-Walsheim-Regular-Trial.otf") format("opentype");
 }
 
 @font-face {
@@ -23,3 +24,24 @@ body {
   font-weight: 600;
   src: url("../public/fonts//GT-Walsheim-Medium-Trial.otf") format("opentype");
 }
+
+
+
+body::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  /* Handle */
+  body::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+  /* Handle on hover */
+  body::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }

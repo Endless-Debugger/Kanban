@@ -19,6 +19,7 @@ function Layout({
       <Sidebar />
       <SecondarySideBar />
       <Main />
+      <div id="popupContainer"></div>
     </>
   );
 }

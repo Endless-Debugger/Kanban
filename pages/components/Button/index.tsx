@@ -7,7 +7,7 @@ const Bbutton = styled("button", {
   height: "40px",
   backgroundColor: "#FFFFFF",
 
-  boxShadow: "0px 5px 0px #DFE1E4",
+  boxShadow: "0px 4px 0px #DFE1E4",
   color: "#6C6F75",
   border: "2px solid #DFE1E4",
   fontWeight: "600",
@@ -17,6 +17,7 @@ const Bbutton = styled("button", {
   userSelect: "none",
   alignItems: "center",
   marginBottom: "4px",
+  fontFamily: "GTWalshiem",
 
   "&:hover": {
     backgroundColor: "var(--primary-light)",

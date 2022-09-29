@@ -1,28 +1,33 @@
 import { styled } from "@stitches/react";
 const NLists = styled("div", {
   display: "flex",
-  width: "1000px",
-  gap: "50px",
+  
+  gap: "30px",
+  height: "650px",
+  overflow: "scroll",
+
+  
+  
 });
 const OneList = styled("div", {
   display: "flex",
   flexFlow: "column",
   minWidth: "340px",
-  gap: "20px",
+
   borderRadius: '8px',
 });
 const InfoDiv = styled("div", {
   height: "80px",
   marginBottom: "20px",
   display: "flex",
-  gap: "50px",
+  gap: "30px",
   
 });
 
 const InfoFlex = styled("div", {
   display: "flex",
   alignItems: "center",
-  width: "345px",
+  width: "340px",
   height: "100%",
   borderBottom: "2px solid black",
 });
@@ -30,7 +35,7 @@ const InfoFlex = styled("div", {
 const InfoFlexPurple = styled("div", {
   display: "flex",
   alignItems: "center",
-  width: "345px",
+  width: "340px",
   height: "100%",
   borderBottom: "2px solid #4734FE",
 });
@@ -38,7 +43,7 @@ const InfoFlexPurple = styled("div", {
 const InfoFlexGreen = styled("div", {
   display: "flex",
   alignItems: "center",
-  width: "345px",
+  width: "340px",
   height: "100%",
   borderBottom: "2px solid #78C552",
 });
@@ -62,9 +67,9 @@ const InfoChip = styled("span", {
 
 // import { DragDropContext, Draggable, Droppable, resetServerContext } from "react-beautiful-dnd";
 // import {v4 as uuid} from "uuid";
-
 const data = [
   {
+
     id: "A",
     title: "Update Client ID",
     subtitle: "FLYTE 3",
@@ -100,7 +105,7 @@ const data = [
     subtitle: "FLYTE 4",
     desc: "lorem ipsum dolor set amet dolo vaccine",
     num_comments: "5",
-    term: "ui",
+    term: "planning",
     date: "May 21",
     image: "no",
   },
@@ -110,7 +115,7 @@ const data = [
     subtitle: "FLYTE 5",
     desc: "lorem ipsum dolor set amet dolo vaccine",
     num_comments: "5",
-    term: "research",
+    term: "planning",
     date: "Jul 22",
     image: "no",
   },
@@ -126,7 +131,7 @@ const data = [
   },
 ];
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   DragDropContext,
   Draggable,
@@ -134,6 +139,8 @@ import {
   resetServerContext,
 } from "react-beautiful-dnd";
 import { v4 as uuid } from "uuid";
+import NewCardPopup from "../NewCardPopup";
+import useOnClickOutside, { Popup } from "../Popup";
 import KanbanCard from "./KanbanCard";
 
 const itemsFromBackend = [
@@ -202,9 +209,14 @@ function Kanban() {
   useEffect(() => {
     setWindowLoaded(true);
   }, []);
+  const [columnId, setColumnId] = useState("")
+  const newCardRef = useRef(null);
+  const [newCardOpen, setNewCardOpen] = useState(false);
+  useOnClickOutside(newCardRef, () => setNewCardOpen(false));
+
   const [columns, setColumns] = useState(columnsFromBackend);
   return (
-    <div style={{ marginLeft: "27px", overflow: "hidden", width: "1200px" }}>
+    <div style={{ marginLeft: "27px", overflow: "hidden", }}>
       <InfoDiv>
         <InfoFlex>
           <svg style={{ width: "26px", height: "26px" }} viewBox="0 0 24 24">
@@ -214,7 +226,7 @@ function Kanban() {
             />
           </svg>
           <InfoHeading>TODO</InfoHeading>
-          <InfoChip>3</InfoChip>
+          <InfoChip>{columns[Object.keys(columns)[0]].items.length}</InfoChip>
           <svg
             style={{
               width: "26px",
@@ -252,7 +264,7 @@ function Kanban() {
             />
           </svg>
           <InfoHeading>IN PROGRESS</InfoHeading>
-          <InfoChip>3</InfoChip>
+          <InfoChip>{columns[Object.keys(columns)[1]].items.length}</InfoChip>
           <svg
             style={{
               width: "26px",
@@ -290,13 +302,20 @@ function Kanban() {
             />
           </svg>
           <InfoHeading>COMPLETED</InfoHeading>
-          <InfoChip>3</InfoChip>
+          <InfoChip>{columns[Object.keys(columns)[2]].items.length}</InfoChip>
           <svg
             style={{
               width: "26px",
               height: "26px",
               color: "#A9B4C0",
               marginLeft: "auto",
+            }}
+            onClick={(e) => {
+              let newCols = columns
+              newCols[uuid()] = {name: "lorem ipsum", items: []}
+              setColumns(newCols)
+              console.log("b")
+              
             }}
             viewBox="0 0 24 24"
           >
@@ -320,6 +339,7 @@ function Kanban() {
             />
           </svg>
         </InfoFlexGreen>
+          
       </InfoDiv>
 
       <NLists>
@@ -328,7 +348,7 @@ function Kanban() {
             onDragEnd={(result: any) => onDragEnd(result, columns, setColumns)}
           >
             
-            {resetServerContext()}
+     
             {Object.entries(columns).map(([columnId, column], index) => {
               return (
                 <div style={{}} key={columnId}>
@@ -341,14 +361,15 @@ function Kanban() {
                             ref={provided.innerRef}
                             style={{
                               background: snapshot.isDraggingOver
-                                ? "#8478FE"
+                                ? ""
                                 : "",
                                 borderRadius: "8px"
                             }}
                           >
                             <OneList>
+                              {console.log(column)}
                               {column.items.map((item, index) => {
-                                return (
+                                return(
                                   <Draggable
                                     key={item.id}
                                     draggableId={item.id}
@@ -374,12 +395,12 @@ function Kanban() {
                                             rotate: snapshot.isDragging
                                               ? "3deg"
                                               : "",
-                                            boxShadow: snapshot.isDragging
-                                              ? "rgba(149, 157, 165, 0.2) 0px 8px 24px"
-                                              : "",
+                                         
+                                           
                                             ...provided.draggableProps.style,
                                           }}
                                         >
+                                          
                                           <KanbanCard
                                             term={item.content.term}
                                             title={item.content.title}
@@ -390,6 +411,9 @@ function Kanban() {
                                             }
                                             subtitle={item.content.subtitle}
                                             desc={item.content.desc}
+                                            style={{ boxShadow: snapshot.isDragging
+                                              ? "rgba(149, 157, 165, 0.2) 0px 8px 24px"
+                                              : "",}}
                                           ></KanbanCard>
                                         </div>
                                       );
@@ -400,14 +424,11 @@ function Kanban() {
                               {provided.placeholder}
                               <button  onClick={(e) => {
                                     
-                                    console.log(column, "hlo")
-                                    column.items.push({id: uuid(), content:  {id: "no", title: "random task", subtitle: "this is the subtitle", desc: "this is desc", 
-                                num_comments: "0", term: "ui", date: "today", image: "no"}});
-                               
-                                setWindowLoaded(false);
-                                setTimeout(() => {
-                                    setWindowLoaded(true)
-                                }, 100)
+                                //     console.log(column, "hlo")
+                                //     column.items.push({id: uuid(), content:  {id: "no", title: "random task", subtitle: "this is the subtitle", desc: "this is desc", 
+                                // num_comments: "0", term: "ui", date: "today", image: "no"}});
+                                setColumnId(columnId)
+                                setNewCardOpen(true)
                                 }} style={{ backgroundColor: "#FFFFFF", fontSize: "16px", cursor: "pointer", height: "44px", border: "1px solid #EAEDF0", borderRadius: "4px", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px", fontWeight: "600", color: "#4734FE"}}>
                                     
                                 <svg style={{width:"24px",height:"24px", }} viewBox="0 0 24 24">
@@ -426,6 +447,11 @@ function Kanban() {
           </DragDropContext>
         )}
       </NLists>
+      <Popup ref={newCardRef} popupState={newCardOpen} >
+            <NewCardPopup items={columns} setItems={setColumns} close={setNewCardOpen} setWindowloaded={setWindowLoaded} id={columnId}>
+
+            </NewCardPopup>
+      </Popup>
     </div>
   );
 }

@@ -1,16 +1,19 @@
 import { styled } from "@stitches/react";
 import AwesomeButton from "react-awesome-button";
 import Button from "../Button";
-import Image from "next/image";
+import Image from "next/image";  
 import Kanban from "../Kanban";
+import { useState } from "react";
 
 const ImageDiv = styled("div", {marginLeft: "auto", borderRadius: "50%", })
-const ImageDivNth = styled("div", { marginRight: "20px", marginLeft: "5px", borderRadius: "50%"})
+const ImageDivNth = styled("div", { marginRight: "24px", marginLeft: "5px", borderRadius: "50%"})
 
 const MainDiv = styled("div", {
   position: "absolute",
   top: "0",
-  left: "461px",
+  left: "437px",
+
+  width: "1482px"
 
 });
 
@@ -19,7 +22,7 @@ const ButtonDiv = styled("div", {
   border: "1px solid #EAEDF0",
   display: "flex",
   alignItems: "center",
-  width: "1460px",
+  width: "1490",
 });
 const InfoDiv = styled("div", {
   height: "80px",
@@ -31,7 +34,7 @@ const TitleDiv = styled("div", {
   border: "1px solid #EAEDF0",
   display: "flex",
   alignItems: "center",
-  width: "1460px",
+  width: "100%",
 });
 
 const FillerRect = styled("div", {
@@ -66,6 +69,7 @@ const SearchDiv = styled("div", {
 });
 
 function Main() {
+  const [search, setSearch ] = useState("");
   return (
     <MainDiv>
       <TitleDiv>
@@ -88,11 +92,10 @@ function Main() {
               d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"
             />
           </svg>
-          <span
-            style={{ color: "#5C6066", fontWeight: "600", marginLeft: "6px" }}
-          >
-            Search
-          </span>
+          <input value={search} placeholder={"Search"} onChange={(e) => {setSearch(e.target.value)}}
+            style={{ color: "#5C6066", width: "200px", fontSize :"14px", fontWeight: "600", marginLeft: "6px", backgroundColor: "transparent", outline: "none", border: "none"}}
+          />
+           
         </SearchDiv>
         <div
           style={{
@@ -103,15 +106,19 @@ function Main() {
             justifyContent: "center",
             border: "2px solid #DFE1E4",
             borderRadius: "10px",
-            marginRight: "18px",
+            marginRight: "22px",
             marginLeft: "15px",
           }}
         >
-          <svg style={{ width: "26px", height: "26px" }} viewBox="0 0 24 24">
-            <path
-              fill="currentColor"
-              d="M21,4H3A2,2 0 0,0 1,6V19A2,2 0 0,0 3,21H21A2,2 0 0,0 23,19V6A2,2 0 0,0 21,4M3,19V6H11V19H3M21,19H13V6H21V19M14,9.5H20V11H14V9.5M14,12H20V13.5H14V12M14,14.5H20V16H14V14.5Z"
-            />
+                    <svg width="24px" height="24px" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g clip-path="url(#clip0_1_1269)">
+          <path d="M16 3C16 2.46957 15.7893 1.96086 15.4142 1.58579C15.0391 1.21071 14.5304 1 14 1H2C1.46957 1 0.960859 1.21071 0.585786 1.58579C0.210714 1.96086 0 2.46957 0 3L0 13C0 13.5304 0.210714 14.0391 0.585786 14.4142C0.960859 14.7893 1.46957 15 2 15H14C14.5304 15 15.0391 14.7893 15.4142 14.4142C15.7893 14.0391 16 13.5304 16 13V3ZM11 2V14H2C1.73478 14 1.48043 13.8946 1.29289 13.7071C1.10536 13.5196 1 13.2652 1 13V3C1 2.73478 1.10536 2.48043 1.29289 2.29289C1.48043 2.10536 1.73478 2 2 2H11ZM12 2H14C14.2652 2 14.5196 2.10536 14.7071 2.29289C14.8946 2.48043 15 2.73478 15 3V13C15 13.2652 14.8946 13.5196 14.7071 13.7071C14.5196 13.8946 14.2652 14 14 14H12V2Z" fill="#5C6066"/>
+          </g>
+          <defs>
+          <clipPath id="clip0_1_1269">
+          <rect width="16" height="16" fill="white"/>
+          </clipPath>
+          </defs>
           </svg>
         </div>
       </TitleDiv>
@@ -125,7 +132,7 @@ function Main() {
             width={"34px"} height={"34px"} style={{borderRadius: "50%"}}
             
             ></Image></ImageDiv>
-            <ImageDivNth>  <Image src="/person.png"
+            <ImageDivNth style={{marginLeft: "5px"}}>  <Image src="/person.png"
             width={"36px"} height={"36px"} style={{borderRadius: "50%"}}
 
             ></Image></ImageDivNth>
@@ -163,7 +170,7 @@ function Main() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            marginLeft: "12px",
+            marginLeft: "10px",
           }}
         >
           <svg style={{ width: "24px", height: "24px" }} viewBox="0 0 24 24">
@@ -180,7 +187,7 @@ function Main() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            marginLeft: "12px",
+            marginLeft: "10px",
           }}
         >
           <svg style={{ width: "24px", height: "24px" }} viewBox="0 0 24 24">

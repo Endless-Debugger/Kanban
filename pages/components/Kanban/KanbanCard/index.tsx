@@ -6,23 +6,25 @@ const KanCard = styled("div", {
    
     width: "340px",
     borderRadius: "8px",
+    boxSizing: "border-box",
     backgroundColor: "#FFFFFF",
     border: "1px solid #EAEDF0",
     height: "fit-content",
+    marginBottom: "20px",
    
     position: "relative",
     '&::after': {
         content: "",
         position: "absolute",
         bottom: "-7px",
-       
-        width: "97%",
-        left: "4px",
-        borderRadius: "1000000px",
-        height: "4px",
-        borderRight: "2px solid #EAEDF0",
-        borderLeft: "2px solid #EAEDF0",
-        borderBottom: "2px solid #EAEDF0",
+        zIndex: "-1",
+        width: "96.5%",
+        left: "5.3px",
+        borderRadius: "10000000000000000px",
+        height: "17px",
+        borderRight: "1px solid #EAEDF0",
+        borderLeft: "1px solid #EAEDF0",
+        borderBottom: "1px solid #EAEDF0",
         backgroundColor: "#FFFFFF",
 
     }
@@ -31,7 +33,7 @@ const KanCard = styled("div", {
 
 
 const Title = styled("h1", {
-    fontSize: "24px",
+    fontSize: "22px",
     fontWeight: "700",
     color: "#111118",
     margin: "0 0 0 13px",
@@ -40,14 +42,14 @@ const Title = styled("h1", {
 
 const SubTitle = styled("h2", {
     color: "#7F8995",
-    fontSize: "16px",
+    fontSize: "15px",
     fontWeight: "400",
     margin: "15px 0 12px 13px",
 })
 
 const Kandesc = styled("h3", {
     color: "#7F8995",
-    fontSize: "14px",
+    fontSize: "16px",
     fontWeight: "400",
     marginLeft: "13px",
     marginTop: "12px",
@@ -61,9 +63,9 @@ const Kanflex = styled("div", {
 
 const KanchipBlue = styled("span", {
     fontSize: "14px",
-    fontWeight: "600",
-    marginLeft: "13px",
+    fontWeight: "700",
     padding: "6px 10px 0px 10px",
+    marginLeft: "13px",
     borderRadius: "6px",
     
     height: "24px",
@@ -80,15 +82,9 @@ const KanCommentDiv = styled("div", {
     alignItems: "center"
 })
 
-const ImageDiv = styled("div", {marginLeft: "auto", marginRight: "-9px", borderRadius: "50%", })
-const ImageDivNth = styled("div", { marginRight: "13px", borderRadius: "50%"})
-const KanchipGreen = styled("span", {
-    fontSize: "13px",
-    fontWeight: "600",
-    marginLeft: "13px",
-    padding: "4px 4px",
-    
-})
+const ImageDiv = styled("div", {marginLeft: "auto", marginRight: "-9px", borderRadius: "50%",})
+const ImageDivNth = styled("div", { marginRight: "13px", borderRadius: "50%",})
+
 
 const DemoDiv = styled("div", {
     marginLeft: "13px",
@@ -101,7 +97,7 @@ const DemoDiv = styled("div", {
 })
 const KanchipPurple = styled("span", {
     fontSize: "14px",
-    fontWeight: "600",
+    fontWeight: "700",
     marginLeft: "13px",
     padding: "6px 10px 0px 10px",
     borderRadius: "6px",
@@ -112,6 +108,18 @@ const KanchipPurple = styled("span", {
     
 })
 
+const KanchipGreen = styled("span", {
+    fontSize: "14px",
+    marginLeft: "13px",
+    fontWeight: "700",
+    padding: "6px 10px 0px 10px",
+    borderRadius: "6px",
+    
+    height: "24px",
+    color: "#78C552",
+    backgroundColor: "rgba(120, 197, 82, 0.15)",
+    
+})
 const CommentSpan = styled("span", {
     color: "#98A5B3",
     fontSize: "15px",
@@ -119,35 +127,42 @@ const CommentSpan = styled("span", {
     marginBottom: "2px"
 })
 
-function KanbanCard ({term, image, desc, title, subtitle, num_comments, date}: {
+function KanbanCard ({term, image, desc, title, subtitle, num_comments, date, style}: {
     term: string,
     image: string,
-    desc: string,
+    desc: string,   
     title: string,
     subtitle: string,
     num_comments: string,
     date: string,
-
+    style:any,
    
 }) {
     
     return (
-        <KanCard>
+      
+        <KanCard style={style}>
             <SubTitle>{subtitle}</SubTitle>
             <Title>{title}</Title>
             <Kandesc>{desc}</Kandesc>
-            {image == "no"? <div></div>: <DemoDiv><Image src={image} layout={"fill"}></Image></DemoDiv>}
+            {image == "no"? <div></div>: <DemoDiv><Image style={{borderRadius: "6px"}} src={image} layout={"fill"}></Image></DemoDiv>}
 
-            <Kanflex>{term == "ui" ? (<KanchipBlue>UI Design</KanchipBlue>)  : (<KanchipPurple>Research</KanchipPurple>)}
+            <Kanflex>{term == "ui" ? (<KanchipBlue>UI Design</KanchipBlue>) : term=="planning" ? (<KanchipGreen>Planning</KanchipGreen>) : term == "research" ? (<KanchipPurple>Research</KanchipPurple>) : null}
             
             <ImageDiv>  <Image src="/person.png"
-            width={"30px"} height={"30px"} style={{borderRadius: "50%"}}
+            width={"36px"} height={"36px"} style={{borderRadius: "50%"}}
+
+            ></Image></ImageDiv>
+         
+             <ImageDiv style={{"marginLeft": "0"}}>  <Image src="/person.png"
+            width={"36px"} height={"36px"} style={{borderRadius: "50%"}}
 
             ></Image></ImageDiv>
             <ImageDivNth>  <Image src="/person.png"
-            width={"30px"} height={"30px"} style={{borderRadius: "50%"}}
+            width={"36px"} height={"36px"} style={{borderRadius: "50%"}}
 
             ></Image></ImageDivNth>
+            
             </Kanflex>
             <KanCommentDiv>
                 <svg style={{width:"20px",height:"20px", marginLeft: "13px"}} viewBox="0 0 24 24">
@@ -160,6 +175,7 @@ function KanbanCard ({term, image, desc, title, subtitle, num_comments, date}: {
                 <CommentSpan style={{marginRight: "13px"}}>&nbsp;{date}</CommentSpan>
             </KanCommentDiv>
         </KanCard>
+
     )
 }
 
