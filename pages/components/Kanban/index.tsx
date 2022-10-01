@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { styled } from "@stitches/react";
 const NLists = styled("div", {
   display: "flex",
@@ -5,7 +7,7 @@ const NLists = styled("div", {
   gap: "30px",
   
   overflowY: "auto",
-  height: "calc(100vh - 149px)"
+  height: "calc(100vh - 270px)"
 
   
   
@@ -205,16 +207,103 @@ const onDragEnd = (result: any, columns: any, setColumns: any) => {
   }
 };
 
+const queryAttr = "data-rbd-drag-handle-draggable-id";
+
+const getDraggedDom = (draggableId:any) => {
+  const domQuery = `[${queryAttr}='${draggableId}']`;
+  const draggedDOM = document.querySelector(domQuery);
+
+  return draggedDOM;
+};
+
 function Kanban() {
   const [windowLoaded, setWindowLoaded] = useState(false);
   useEffect(() => {
     setWindowLoaded(true);
   }, []);
+  const [placeholderProps, setPlaceholderProps] = useState({});
   const [columnId, setColumnId] = useState("")
   const newCardRef = useRef(null);
   const [newCardOpen, setNewCardOpen] = useState(false);
   useOnClickOutside(newCardRef, () => setNewCardOpen(false));
+  const handleDragStart = event => {
+    const draggedDOM = getDraggedDom(event.draggableId);
+    console.log(draggedDOM)
+    if (!draggedDOM) {
+      return;
+    }
 
+    const { clientHeight, clientWidth } = draggedDOM;
+    
+    const sourceIndex = event.source.index;
+    var clientY =
+      parseFloat(window.getComputedStyle(draggedDOM.parentNode).paddingTop) +
+      [...draggedDOM.parentNode.children]
+        .slice(0, sourceIndex)
+        .reduce((total, curr) => {
+          const style = curr.currentStyle || window.getComputedStyle(curr);
+          const marginBottom = parseFloat(style.marginBottom);
+          return total + curr.clientHeight + marginBottom;
+        }, 0);
+
+    setPlaceholderProps({
+      clientHeight,
+      clientWidth,
+      clientY,
+      clientX: parseFloat(
+        window.getComputedStyle(draggedDOM.parentNode).paddingLeft
+      )
+    });
+  };
+  const handleDragUpdate = event => {
+    if (!event.destination) {
+      return;
+    }
+
+    const draggedDOM = getDraggedDom(event.draggableId);
+
+    if (!draggedDOM) {
+      return;
+    }
+
+    const { clientHeight, clientWidth } = draggedDOM;
+    const destinationIndex = event.destination.index;
+    const sourceIndex = event.source.index;
+
+    const childrenArray = [...draggedDOM.parentNode.children];
+    const movedItem = childrenArray[sourceIndex];
+    childrenArray.splice(sourceIndex, 1);
+
+    const updatedArray = [
+      ...childrenArray.slice(0, destinationIndex),
+      movedItem,
+      ...childrenArray.slice(destinationIndex + 1)
+    ];
+
+    var clientY =
+      parseFloat(window.getComputedStyle(draggedDOM.parentNode).paddingTop) +
+      updatedArray.slice(0, destinationIndex).reduce((total, curr) => {
+        const style = curr.currentStyle || window.getComputedStyle(curr);
+        const marginBottom = parseFloat(style.marginBottom);
+        return total + curr.clientHeight + marginBottom;
+      }, 0);
+
+    setPlaceholderProps({
+      clientHeight,
+      clientWidth,
+      clientY,
+      clientX: parseFloat(
+        window.getComputedStyle(draggedDOM.parentNode).paddingLeft
+      )
+    });
+  };
+  const handleDragEnd = (result:any) => {
+    setPlaceholderProps({});
+    // dropped outside the list
+    if (!result.destination) {
+      return;
+    }
+  }
   const [columns, setColumns] = useState(columnsFromBackend);
   return (
     <div style={{ marginLeft: "27px", overflow: "hidden", }}>
@@ -349,7 +438,10 @@ function Kanban() {
       <NLists>
         {windowLoaded && (
           <DragDropContext
-            onDragEnd={(result: any) => onDragEnd(result, columns, setColumns)}
+            onDragEnd={(result: any) => {onDragEnd(result, columns, setColumns), handleDragEnd(result)}}
+           
+            onDragStart={handleDragStart}
+            onDragUpdate={handleDragUpdate}
           >
             
      
@@ -370,7 +462,7 @@ function Kanban() {
                                 borderRadius: "8px"
                             }}
                           >
-                            <OneList>
+                            <OneList style={{position: "relative"}}>
                               {console.log(column)}
                               {column.items.map((item, index) => {
                                 return(
@@ -413,6 +505,7 @@ function Kanban() {
                                             num_comments={
                                               item.content.num_comments
                                             }
+                                            done={columnId == Object.keys(columns)[2]}
                                             subtitle={item.content.subtitle}
                                             desc={item.content.desc}
                                             style={{ boxShadow: snapshot.isDragging
@@ -425,7 +518,16 @@ function Kanban() {
                                   </Draggable>
                                 );
                               })}
+                              {console.log(provided.placeholder)}
                               {provided.placeholder}
+                              {/* {Object.keys(placeholderProps).length !== 0 && snapshot.isDraggingOver  && (
+                                <div style={{border: "1px solid #4734FE", backgroundColor: "#F7F9FA", borderRadius: "8px", position: "absolute", boxSizing: "border-box", top: placeholderProps.clientY,
+                                left: placeholderProps.clientX,
+                                height: placeholderProps.clientHeight - 20,
+                                width: placeholderProps.clientWidth }}>
+
+                                </div>
+                              )} */}
                               <button  onClick={(e) => {
                                     
                                 //     console.log(column, "hlo")

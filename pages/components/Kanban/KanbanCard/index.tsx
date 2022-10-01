@@ -82,7 +82,7 @@ const KanCommentDiv = styled("div", {
     alignItems: "center"
 })
 
-const ImageDiv = styled("div", {marginLeft: "auto", marginRight: "-9px", borderRadius: "50%",})
+const ImageDiv = styled("div", {marginLeft: "auto", marginRight: "-13px", borderRadius: "50%",})
 const ImageDivNth = styled("div", { marginRight: "13px", borderRadius: "50%",})
 
 
@@ -127,7 +127,7 @@ const CommentSpan = styled("span", {
     marginBottom: "2px"
 })
 
-function KanbanCard ({term, image, desc, title, subtitle, num_comments, date, style}: {
+function KanbanCard ({term, image, desc, title, subtitle, num_comments, date, style, done}: {
     term: string,
     image: string,
     desc: string,   
@@ -136,6 +136,7 @@ function KanbanCard ({term, image, desc, title, subtitle, num_comments, date, st
     num_comments: string,
     date: string,
     style:any,
+    done:any,
    
 }) {
     
@@ -149,30 +150,34 @@ function KanbanCard ({term, image, desc, title, subtitle, num_comments, date, st
 
             <Kanflex>{term == "ui" ? (<KanchipBlue>UI Design</KanchipBlue>) : term=="planning" ? (<KanchipGreen>Planning</KanchipGreen>) : term == "research" ? (<KanchipPurple>Research</KanchipPurple>) : null}
             
-            <ImageDiv>  <Image src="/person.png"
-            width={"36px"} height={"36px"} style={{borderRadius: "50%"}}
+            <ImageDiv>  <Image src="https://kanban.up.railway.app/_next/static/media/5.ea4ea57f.svg"
+            width={"34px"} height={"34px"} style={{borderRadius: "50%"}}
 
             ></Image></ImageDiv>
          
-             <ImageDiv style={{"marginLeft": "0"}}>  <Image src="/person.png"
-            width={"36px"} height={"36px"} style={{borderRadius: "50%"}}
+             <ImageDiv style={{"marginLeft": "0"}}>  <Image src="https://kanban.up.railway.app/_next/static/media/7.572d3d6c.svg"
+            width={"34px"} height={"34px"} style={{borderRadius: "50%"}}
 
             ></Image></ImageDiv>
-            <ImageDivNth>  <Image src="/person.png"
-            width={"36px"} height={"36px"} style={{borderRadius: "50%"}}
+            <ImageDivNth>  <Image src="https://kanban.up.railway.app/_next/static/media/6.30dc5648.svg"
+            width={"34px"} height={"34px"} style={{borderRadius: "50%"}}
 
             ></Image></ImageDivNth>
             
             </Kanflex>
-            <KanCommentDiv>
+            <KanCommentDiv style={{alignItems: "center"}}>
                 <svg style={{width:"20px",height:"20px", marginLeft: "13px"}} viewBox="0 0 24 24">
                     <path fill="#98A5B3" d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2M20 16H5.2L4 17.2V4H20V16Z" />
                 </svg>
                 <CommentSpan>&nbsp;{num_comments}</CommentSpan>
-                <svg style={{width:"22px",height:"22px", marginLeft: "auto"}} viewBox="0 0 24 24">
+                {!done ? (
+                <svg style={{width:"20px",height:"20px", marginLeft: "auto"}} viewBox="0 0 24 24">
                     <path fill="#98A5B3" d="M19,19H5V8H19M16,1V3H8V1H6V3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3H18V1M17,12H12V17H17V12Z" />
-                </svg>
-                <CommentSpan style={{marginRight: "13px"}}>&nbsp;{date}</CommentSpan>
+                </svg>) : <svg style={{width:"22px",height:"22px", marginLeft: "auto"}} viewBox="0 0 24 24">
+                    <path fill="rgb(120, 197, 82)" d="M12 2C6.5 2 2 6.5 2 12S6.5 22 12 22 22 17.5 22 12 17.5 2 12 2M10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z" />
+                </svg>}
+                {!done ? (
+                <CommentSpan style={{marginRight: "13px", marginBottom: "0"}}>&nbsp;{date}</CommentSpan>) : (<CommentSpan style={{color: "rgb(120, 197, 82)", marginRight :"13px", fontSize: "16px", marginBottom: "0", fontWeight: "700"}}>&nbsp;Done</CommentSpan>)}
             </KanCommentDiv>
         </KanCard>
 

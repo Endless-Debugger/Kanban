@@ -2,13 +2,13 @@ import { styled } from "@stitches/react";
 import { useState } from "react";
 
 const Secondary = styled("div", {
-  width: "18.5%",
+  width: "19.5%",
   borderRight: "1px solid #EAEDF0",
   height: "100vh",
   ovverflow: "scroll",
   position: "absolute",
   top: "0",
-  left: "87px",
+  left: "4.5%",
 });
 
 const TitleDiv = styled("div", {
@@ -54,7 +54,7 @@ const ProgressDiv = styled("div", {
         content: "🎉",
         position: "absolute",
         top: "-8px",
-        left: "100px",
+        left: "40%",
         height: "27px",
         width: "27px",
         display: "flex",

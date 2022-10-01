@@ -11,9 +11,9 @@ const ImageDivNth = styled("div", { marginRight: "24px", marginLeft: "5px", bord
 const MainDiv = styled("div", {
   position: "absolute",
   top: "0",
-  left: "23%",
+  left: "24%",
 
-  width: "77%"
+  width: "76%"
 
 });
 
